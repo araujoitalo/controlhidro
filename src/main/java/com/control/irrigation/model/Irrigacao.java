@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -20,7 +21,7 @@ public class Irrigacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Idrrigacao")
+    @Column(name = "IdIrrigacao")
     private Integer idIrrigacao;
 
     @Column(name = "IdParcela", nullable = false)
@@ -37,10 +38,12 @@ public class Irrigacao {
     private Float gotejo;
 
     @Column(name = "InicioIrrigacao", nullable = false)
-    private LocalDateTime inicioIrrigacao;
+    @JsonFormat(pattern = "HH:mm:ss")
+    private LocalTime inicioIrrigacao;
 
     @Column(name = "FimIrrigacao")
-    private LocalDateTime fimIrrigacao;
+    @JsonFormat(pattern = "HH:mm:ss")
+    private LocalTime fimIrrigacao;
 
     @Column(name = "Quantidade", nullable = false)
     private Float quantidade;
