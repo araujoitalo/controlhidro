@@ -45,6 +45,7 @@ public class JWTTokenAutenticacaoService {
         response.addHeader(HEADER_STRING, token); /*Authorization: Bearer vb45bty3vtn65vy34ytvb5t43ivb5656*/
 
         /*Liberando resposta para portas difernetes que usam a API ou caso clientes WEB*/
+        response.addHeader("Access-Control-Allow-Origin", "*");
         liberacaoCors(response);
 
         /*Escreve token como resposta no corpo http*/
@@ -85,20 +86,20 @@ public class JWTTokenAutenticacaoService {
 
     private void liberacaoCors(HttpServletResponse response) {
 
-        if (response.getHeader("Acess-Control-Allow-Origin") == null){
-            response.addHeader("Acess-Control-Allow-Origin", "*");
+        if (response.getHeader("Access-Control-Allow-Origin") == null){
+            response.addHeader("Access-Control-Allow-Origin", "*");
         }
 
-        if (response.getHeader("Acess-Control-Allow-Headers") == null){
-            response.addHeader("Acess-Control-Allow-Headers", "*");
+        if (response.getHeader("Access-Control-Allow-Headers") == null){
+            response.addHeader("Access-Control-Allow-Headers", "*");
         }
 
-        if (response.getHeader("Acess-Control-Request-Headers") == null){
-            response.addHeader("Acess-Control-Request-Headers", "*");
+        if (response.getHeader("Access-Control-Request-Headers") == null){
+            response.addHeader("Access-Control-Request-Headers", "*");
         }
 
-        if (response.getHeader("Acess-Control-Allow-Methods") == null){
-            response.addHeader("Acess-Control-Allow-Methods", "*");
+        if (response.getHeader("Access-Control-Allow-Methods") == null){
+            response.addHeader("Access-Control-Allow-Methods", "*");
         }
     }
 }

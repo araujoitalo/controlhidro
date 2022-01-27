@@ -51,6 +51,17 @@ public class IndexController {
         return new ResponseEntity<List<Usuario>>(list, HttpStatus.OK);
     }
 
+    /*END-POINT consulta de usuário por nome*/
+    @GetMapping(value = "/usuarioPorNome/{nome}", produces = "application/json")
+    @CachePut("cacheusuarios")
+    public ResponseEntity<List<Usuario>> usuarioPorNome (@PathVariable("nome") String nome) throws InterruptedException{
+
+        List<Usuario> list = (List<Usuario>) usuarioRepository.findUserByNome(nome);
+
+        return new ResponseEntity<List<Usuario>>(list, HttpStatus.OK);
+    }
+
+
     @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<Usuario> cadastrar(@RequestBody Usuario usuario){
 
@@ -73,7 +84,7 @@ public class IndexController {
             usuario.getTelefones().get(pos).setUsuario(usuario);
         }
 
-        Usuario userTemporario = usuarioRepository.findUserByLogin(usuario.getLogin());
+        Usuario userTemporario = usuarioRepository.findById(usuario.getIdUsuario()).get();
 
         if (!userTemporario.getSenha().equals(usuario.getSenha())) { /*Senhas diferentes*/
             String senhacriptografada = new BCryptPasswordEncoder().encode(usuario.getSenha());
