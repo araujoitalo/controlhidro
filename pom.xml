@@ -13,10 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>controlirrigation</name>
     <description>Projeto de Control</description>
-    <properties>
-        <java.version>11</java.version>
-        <maven.test.skip>true</maven.test.skip>
-    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
