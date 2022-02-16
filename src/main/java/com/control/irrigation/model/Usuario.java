@@ -36,22 +36,16 @@ public class Usuario implements UserDetails {
     @OneToMany(mappedBy = "usuario", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Telefone> telefones = new ArrayList<Telefone>();
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "usuarios_role", uniqueConstraints = @UniqueConstraint(
-                        columnNames = {"usuario_id", "role_id"}, name = "unique_role_user"),
-
-            joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "idUsuario", table = "usuario", unique = false,
-            foreignKey = @ForeignKey(name = "usuario_fk", value = ConstraintMode.CONSTRAINT)),
-
-            inverseJoinColumns =  @JoinColumn (name = "role_id", referencedColumnName = "id", table = "role", unique = false, updatable = false,
-            foreignKey = @ForeignKey (name = "role_fk", value = ConstraintMode.CONSTRAINT)))
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "USUARIOS_ROLE", joinColumns = @JoinColumn(name = "usuario_id")
+            , inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
     @OneToMany
     @JoinColumn(name = "idUsuario", foreignKey = @ForeignKey(name = "FK_FAZENDA_USUARIO"))
     private List<Fazenda> fazendas;
 
-
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;

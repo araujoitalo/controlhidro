@@ -1,5 +1,6 @@
 package com.control.irrigation.controller;
 
+import com.control.irrigation.model.Cultura;
 import com.control.irrigation.model.Fazenda;
 import com.control.irrigation.model.Outorga;
 import com.control.irrigation.repository.FazendaRepository;
@@ -31,11 +32,22 @@ public class OutorgaController {
 
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Outorga salvar(@RequestBody @Valid Outorga outorga){
-        return repository.save(outorga);
+    @PostMapping(value = "/", produces = "application/json")
+    public ResponseEntity<Outorga> salvar(@RequestBody Outorga outorga){
+
+        Outorga outorgaSalvo = repository.save(outorga);
+
+        return new ResponseEntity<Outorga>(outorgaSalvo, HttpStatus.OK);
     }
+
+    @PutMapping(value = "/", produces = "application/json")
+    public ResponseEntity<Outorga> alterar(@RequestBody Outorga outorga ){
+
+        Outorga outorgaSalvo = repository.save(outorga);
+
+        return new ResponseEntity<Outorga>(outorgaSalvo, HttpStatus.OK);
+    }
+
 
     @GetMapping("{id}")
     public Outorga acharPorId(@PathVariable Integer id ){
@@ -56,21 +68,5 @@ public class OutorgaController {
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não foi possível deletar a Outorga") );
 
     }
-
-    @PutMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizar( @PathVariable Integer id,
-                           @RequestBody @Valid Outorga outorgaAtualizado ) {
-        repository
-                .findById(id)
-                .map( outorga -> {
-                    outorga.setNomeOutorga((outorgaAtualizado.getNomeOutorga()));
-
-
-                    return repository.save(outorga);
-                })
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Outorga não encontrada") );
-    }
-
 
 }

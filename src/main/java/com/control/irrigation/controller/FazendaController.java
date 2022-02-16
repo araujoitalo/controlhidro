@@ -1,6 +1,9 @@
 package com.control.irrigation.controller;
 
+import com.control.irrigation.model.Cultura;
 import com.control.irrigation.model.Fazenda;
+import com.control.irrigation.model.Gotejador;
+import com.control.irrigation.model.Manejo;
 import com.control.irrigation.repository.FazendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -33,7 +36,16 @@ public class FazendaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Fazenda salvar(@RequestBody @Valid Fazenda fazenda){
+
         return repository.save(fazenda);
+    }
+
+    @GetMapping("/buscaFazendas/{idUsuario}")
+    @CacheEvict(value = "cachefazendaid", allEntries = true)
+    @CachePut("cachefazendaid")
+    public ResponseEntity<List<Fazenda>> obterFazendasPorIdUsuario(@PathVariable(value = "idUsuario") Integer idUsuario){
+        List<Fazenda> list = (List<Fazenda>) repository.buscaFazendasPorIdUsuario(idUsuario);
+        return new ResponseEntity<List<Fazenda>>(list, HttpStatus.OK);
     }
 
     @GetMapping("{id}")
@@ -56,20 +68,13 @@ public class FazendaController {
 
     }
 
-    @PutMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizar( @PathVariable Integer id,
-                           @RequestBody @Valid Fazenda fazendaAtualizado ) {
-        repository
-                .findById(id)
-                .map( fazenda -> {
-                    fazenda.setNomeFazenda((fazendaAtualizado.getNomeFazenda()));
-                    fazenda.setArea((fazendaAtualizado.getArea()));
-                    fazenda.setAltitude((fazendaAtualizado.getAltitude()));
 
-                    return repository.save(fazenda);
-                })
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fazenda não encontrada") );
+    @PutMapping(value = "/", produces = "application/json")
+    public ResponseEntity<Fazenda> alterar(@RequestBody Fazenda fazenda ){
+
+        Fazenda fazendaSalvo = repository.save(fazenda);
+
+        return new ResponseEntity<Fazenda>(fazendaSalvo, HttpStatus.OK);
     }
 
 

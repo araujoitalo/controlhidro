@@ -28,10 +28,10 @@ public class Irrigacao {
     private Integer idParcela;
 
     @Column(name = "DataIrrigacao", nullable = false, updatable = false )
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataIrrigacao;
 
-    @Column(name = "Pivo", nullable = false)
+    @Column(name = "Pivo")
     private Float pivo;
 
     @Column(name = "Gotejo", nullable = false)

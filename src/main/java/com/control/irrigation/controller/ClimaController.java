@@ -1,6 +1,7 @@
 package com.control.irrigation.controller;
 
 import com.control.irrigation.model.Clima;
+import com.control.irrigation.model.Cultura;
 import com.control.irrigation.repository.ClimaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -29,11 +30,19 @@ public class ClimaController {
 
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Clima salvar(@RequestBody @Valid Clima clima){
+    @PostMapping(value = "/", produces = "application/json")
+    public ResponseEntity<Clima> salvar( @RequestBody Clima clima ){
 
-        return repository.save(clima);
+        Clima climaSalvo = repository.save(clima);
+
+        return new ResponseEntity<Clima>(climaSalvo, HttpStatus.OK);
+    }
+    @PutMapping(value = "/", produces = "application/json")
+    public ResponseEntity<Clima> alterar(@RequestBody Clima clima ){
+
+        Clima climaSalvo = repository.save(clima);
+
+        return new ResponseEntity<Clima>(climaSalvo, HttpStatus.OK);
     }
 
     @GetMapping("{id}")
@@ -53,19 +62,6 @@ public class ClimaController {
                 })
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não foi possível deletar o Clima") );
 
-    }
-
-    @PutMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizar( @PathVariable Integer id,
-                           @RequestBody @Valid Clima climaAtualizado ) {
-        repository
-                .findById(id)
-                .map( clima -> {
-                    clima.setPrecipitacao(climaAtualizado.getPrecipitacao());
-                    return repository.save(clima);
-                })
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Clima não encontrada") );
     }
 
 

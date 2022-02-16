@@ -18,8 +18,7 @@ import java.util.List;
 public class Cultura {
 
     @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdCultura")
     private Integer idCultura;
 
@@ -33,7 +32,7 @@ public class Cultura {
     @JoinColumn(name = "idCultura", foreignKey = @ForeignKey(name = "FK_PARCELA_CULTURA"))
     private List<Parcela> parcelas;
 
-    @OneToMany
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "idCultura", foreignKey = @ForeignKey(name = "FK_CULTURAFASE_CULTURA"))
     private List<CulturaFase> culturaFases;
 

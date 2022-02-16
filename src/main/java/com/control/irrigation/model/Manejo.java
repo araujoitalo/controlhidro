@@ -42,7 +42,7 @@ public class Manejo {
     private Float irrigacaoDesnecessaria;
 
     @Column(name = "Percentimetro")
-    private Float Percentimetro;
+    private Float percentimetro;
 
     @Column(name = "ConsumoDiario")
     private Float consumoDiario;

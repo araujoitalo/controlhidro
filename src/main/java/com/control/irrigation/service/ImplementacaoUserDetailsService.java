@@ -28,4 +28,11 @@ public class ImplementacaoUserDetailsService implements UserDetailsService {
                         usuario.getPassword(),
                         usuario.getAuthorities());
     }
+
+    /**public void insereAcessoPadrao(Integer idUsuario) {
+        String constraint = usuarioRepository.consultaConstraintRole();
+        usuarioRepository.removerConstraintRole(constraint);
+        usuarioRepository.removerIndexRole(constraint);
+        usuarioRepository.insereAcessoRolePadrao(idUsuario);
+    }**/
 }

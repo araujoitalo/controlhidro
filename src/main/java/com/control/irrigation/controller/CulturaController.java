@@ -1,12 +1,16 @@
 package com.control.irrigation.controller;
 
 import com.control.irrigation.model.Cultura;
+import com.control.irrigation.model.Usuario;
+import com.control.irrigation.repository.CulturaFaseRepository;
 import com.control.irrigation.repository.CulturaRepository;
+import com.control.irrigation.repository.TelefoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -20,6 +24,9 @@ public class CulturaController {
     @Autowired
     private CulturaRepository repository;
 
+    @Autowired
+    private CulturaFaseRepository culturaFaseRepository;
+
     @GetMapping(value = "/", produces = "application/json")
     @CacheEvict(value = "cachecultura", allEntries = true)
     @CachePut("cachecultura")
@@ -28,11 +35,20 @@ public class CulturaController {
         return new ResponseEntity<List<Cultura>>(list, HttpStatus.OK);
 
     }
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Cultura salvar( @RequestBody @Valid Cultura cultura ){
+    @PostMapping(value = "/", produces = "application/json")
+    public ResponseEntity<Cultura> salvar( @RequestBody Cultura cultura ){
 
-        return repository.save(cultura);
+        Cultura culturaSalvo = repository.save(cultura);
+
+        return new ResponseEntity<Cultura>(culturaSalvo, HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/", produces = "application/json")
+    public ResponseEntity<Cultura> alterar( @RequestBody Cultura cultura ){
+
+        Cultura culturaSalvo = repository.save(cultura);
+
+        return new ResponseEntity<Cultura>(culturaSalvo, HttpStatus.OK);
     }
 
     @GetMapping("{id}")
@@ -43,7 +59,6 @@ public class CulturaController {
     }
 
     @DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar( @PathVariable Integer id ){
         repository
                 .findById(id)
@@ -55,18 +70,20 @@ public class CulturaController {
 
     }
 
-    @PutMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizar( @PathVariable Integer id,
-                           @RequestBody @Valid Cultura culturaAtualizado ) {
-        repository
-                .findById(id)
-                .map( cultura -> {
-                    cultura.setNomeCultura(culturaAtualizado.getNomeCultura());
-                    return repository.save(cultura);
-                })
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cultura não encontrada") );
+    @DeleteMapping(value = "/{id}", produces = "application/json")
+    public String delete(@PathVariable(value = "id") Integer id){
+
+        repository.deleteById(id);
+
+        return "ok";
     }
+
+    @DeleteMapping(value = "/removerCulturaFase/{id}", produces = "application/json" )
+    public String deleteCulturaFase(@PathVariable(value = "id") Integer id){
+        culturaFaseRepository.deleteById(id);
+        return "ok";
+    }
+
 
 
 }

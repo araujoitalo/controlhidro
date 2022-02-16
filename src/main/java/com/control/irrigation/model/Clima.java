@@ -26,7 +26,7 @@ public class Clima{
     private Integer idFazenda;
 
     @Column(name = "DataClima", nullable = false)
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataClima;
 
     @Column(name = "TemperaturaMaxima", nullable = false)

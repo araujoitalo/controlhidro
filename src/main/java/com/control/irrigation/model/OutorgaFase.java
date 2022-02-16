@@ -32,11 +32,11 @@ public class OutorgaFase {
     private Double limiteFase;
 
     @Column(name = "InicioFase", nullable = false)
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate inicioFase;
 
     @Column(name = "FimFase", nullable = false)
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fimFase;
 
 }

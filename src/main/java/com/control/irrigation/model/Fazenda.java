@@ -36,7 +36,8 @@ public class Fazenda {
     private Double altitude;
 
     @Column(name = "DataCadastro", updatable = false )
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    //@JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataCadastro;
 
     @OneToMany
