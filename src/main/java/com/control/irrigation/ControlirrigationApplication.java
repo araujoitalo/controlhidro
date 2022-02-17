@@ -17,6 +17,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import static org.springframework.boot.SpringApplication.*;
 
 @SpringBootApplication
+@EntityScan(basePackages = {"com.control.irrigation.model"})
+@ComponentScan(basePackages = {"com.*"})
+@EnableJpaRepositories(basePackages = {"com.control.irrigation.repository"})
+@EnableTransactionManagement
+@EnableWebMvc
+@RestController
+@EnableAutoConfiguration
+@EnableCaching
 public class ControlirrigationApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
