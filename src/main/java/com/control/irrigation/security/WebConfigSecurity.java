@@ -15,7 +15,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /*Mapeia URL, endereços, autoriza ou bloqueia acessos a URL*/
 @Configuration
-@EnableWebSecurity
 public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
