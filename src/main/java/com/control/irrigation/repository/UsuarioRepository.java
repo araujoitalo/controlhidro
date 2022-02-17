@@ -13,7 +13,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@EnableJpaRepositories(basePackages="com.control.irrigation.repository", entityManagerFactoryRef="emf")
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     @Query("select u from Usuario u where u.login = ?1")
