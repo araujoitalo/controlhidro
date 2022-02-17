@@ -14,10 +14,6 @@
     <name>controlirrigation</name>
     <description>Projeto de Control</description>
 
-    <properties>
-        <java.version>15</java.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -40,7 +36,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
-            <version>2.6.2</version>
         </dependency>
 
         <dependency>
@@ -81,19 +76,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
-            <version>2.5.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>5.1.6.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>5.1.6.RELEASE</version>
         </dependency>
 
         <dependency>
