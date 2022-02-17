@@ -19,7 +19,6 @@ import static org.springframework.boot.SpringApplication.*;
 @SpringBootApplication
 @EntityScan(basePackages = {"com.control.irrigation.model"})
 @ComponentScan(basePackages = {"com.*"})
-@EnableJpaRepositories(basePackages = {"com.control.irrigation.repository"})
 @EnableTransactionManagement
 @EnableWebMvc
 @RestController
