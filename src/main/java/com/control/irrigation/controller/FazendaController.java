@@ -5,6 +5,7 @@ import com.control.irrigation.model.Fazenda;
 import com.control.irrigation.model.Gotejador;
 import com.control.irrigation.model.Manejo;
 import com.control.irrigation.repository.FazendaRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/fazendas")
+@RequiredArgsConstructor
 public class FazendaController {
 
     @Autowired

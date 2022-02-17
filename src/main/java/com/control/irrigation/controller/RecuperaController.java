@@ -3,6 +3,7 @@ package com.control.irrigation.controller;
 import com.control.irrigation.ObjetoError;
 import com.control.irrigation.model.Usuario;
 import com.control.irrigation.repository.UsuarioRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.Calendar;
 
 @RestController
 @RequestMapping(value = "/recuperar")
+@RequiredArgsConstructor
 public class RecuperaController {
 	
 	@Autowired

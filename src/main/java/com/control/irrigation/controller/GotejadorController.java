@@ -2,6 +2,7 @@ package com.control.irrigation.controller;
 
 import com.control.irrigation.model.Gotejador;
 import com.control.irrigation.repository.GotejadorRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/gotejadores")
+@RequiredArgsConstructor
 public class GotejadorController {
 
     @Autowired

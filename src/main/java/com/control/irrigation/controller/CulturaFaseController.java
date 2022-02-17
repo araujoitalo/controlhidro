@@ -2,6 +2,7 @@ package com.control.irrigation.controller;
 
 import com.control.irrigation.model.CulturaFase;
 import com.control.irrigation.repository.CulturaFaseRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/culturafases")
+@RequiredArgsConstructor
 public class CulturaFaseController {
 
     @Autowired

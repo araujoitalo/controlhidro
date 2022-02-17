@@ -5,6 +5,7 @@ import com.control.irrigation.model.Fazenda;
 import com.control.irrigation.model.Outorga;
 import com.control.irrigation.repository.FazendaRepository;
 import com.control.irrigation.repository.OutorgaRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/outorgas")
+@RequiredArgsConstructor
 public class OutorgaController {
 
     @Autowired

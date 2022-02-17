@@ -4,6 +4,7 @@ import com.control.irrigation.model.Usuario;
 import com.control.irrigation.repository.TelefoneRepository;
 import com.control.irrigation.repository.UsuarioRepository;
 import com.control.irrigation.service.ImplementacaoUserDetailsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -22,6 +23,7 @@ import java.util.Optional;
 
 @RestController /*Arquitetura REST*/
 @RequestMapping(value = "/usuario")
+@RequiredArgsConstructor
 public class IndexController {
 
     @Autowired /*se fosse CDI seria @Inject*/

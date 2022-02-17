@@ -4,6 +4,7 @@ import com.control.irrigation.model.Clima;
 import com.control.irrigation.model.Irrigacao;
 import com.control.irrigation.repository.ClimaRepository;
 import com.control.irrigation.repository.IrrigacaoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/irrigacoes")
+@RequiredArgsConstructor
 public class IrrigacaoController  {
 
     @Autowired

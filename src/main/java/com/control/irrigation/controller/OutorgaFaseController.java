@@ -2,6 +2,7 @@ package com.control.irrigation.controller;
 
 import com.control.irrigation.model.OutorgaFase;
 import com.control.irrigation.repository.OutorgaFaseRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/outorgafases")
+@RequiredArgsConstructor
 public class OutorgaFaseController {
 
     @Autowired

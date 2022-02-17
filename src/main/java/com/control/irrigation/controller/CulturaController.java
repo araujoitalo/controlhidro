@@ -5,6 +5,7 @@ import com.control.irrigation.model.Usuario;
 import com.control.irrigation.repository.CulturaFaseRepository;
 import com.control.irrigation.repository.CulturaRepository;
 import com.control.irrigation.repository.TelefoneRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/culturas")
+@RequiredArgsConstructor
 public class CulturaController {
 
     @Autowired
