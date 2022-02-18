@@ -39,7 +39,10 @@ public class ControlirrigationApplication implements WebMvcConfigurer {
 		registry.addMapping("/**")
 				//.allowedMethods("*")
 				.allowedOrigins("*")
-				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
+				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT")
+				.allowCredentials(true)
+				.maxAge(3600)
+				.allowedHeaders("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
 	}
 
 }
