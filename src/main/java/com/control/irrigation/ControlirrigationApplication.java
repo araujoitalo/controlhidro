@@ -37,8 +37,9 @@ public class ControlirrigationApplication implements WebMvcConfigurer {
 	public void addCorsMappings(CorsRegistry registry) {
 
 		registry.addMapping("/**")
-				.allowedMethods("*")
-				.allowedOrigins("https://controle-irrigacao-app.herokuapp.com/*");
+				//.allowedMethods("*")
+				.allowedOrigins("https://controle-irrigacao-app.herokuapp.com/*")
+				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
 	}
 
 }
