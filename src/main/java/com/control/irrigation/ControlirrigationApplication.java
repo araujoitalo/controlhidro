@@ -40,9 +40,6 @@ public class ControlirrigationApplication implements WebMvcConfigurer {
 				.allowedOrigins("*")
 				.allowedMethods("*");
 
-		registry.addMapping("/usuario/**")
-				.allowedMethods("*")
-				.allowedOrigins("*");
 	}
 
 }
