@@ -38,7 +38,7 @@ public class ControlirrigationApplication implements WebMvcConfigurer {
 
 		registry.addMapping("/**")
 				.allowedMethods("*")
-				.allowedOrigins("https://controle-irrigacao-app.herokuapp.com/");
+				.allowedOrigins("https://controle-irrigacao-app.herokuapp.com/*");
 	}
 
 }
