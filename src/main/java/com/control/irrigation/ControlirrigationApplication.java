@@ -37,10 +37,12 @@ public class ControlirrigationApplication implements WebMvcConfigurer {
 	public void addCorsMappings(CorsRegistry registry) {
 
 		registry.addMapping("/**")
-				//.allowedMethods("*")
 				.allowedOrigins("*")
-				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT")
-				.exposedHeaders("Authorization");
+				.allowedMethods("*");
+
+		registry.addMapping("/usuario/**")
+				.allowedMethods("*")
+				.allowedOrigins("*");
 	}
 
 }
