@@ -2,6 +2,7 @@ package com.control.irrigation.controller;
 
 import com.control.irrigation.model.Clima;
 import com.control.irrigation.model.Cultura;
+import com.control.irrigation.model.Gotejador;
 import com.control.irrigation.repository.ClimaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,14 @@ public class ClimaController {
         List<Clima> list = (List<Clima>) repository.findAll();
         return new ResponseEntity<List<Clima>>(list, HttpStatus.OK);
 
+    }
+
+    @GetMapping("/buscaClimas/{idFazenda}")
+    @CacheEvict(value = "cacheclimaid", allEntries = true)
+    @CachePut("cacheclimaid")
+    public ResponseEntity<List<Clima>> obterClimasPorIdFazenda(@PathVariable(value = "idFazenda") Integer idFazenda){
+        List<Clima> list = (List<Clima>) repository.buscaClimaPorIdFazenda(idFazenda);
+        return new ResponseEntity<List<Clima>>(list, HttpStatus.OK);
     }
 
     @PostMapping(value = "/", produces = "application/json")

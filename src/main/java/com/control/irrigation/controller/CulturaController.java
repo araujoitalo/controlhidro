@@ -1,6 +1,7 @@
 package com.control.irrigation.controller;
 
 import com.control.irrigation.model.Cultura;
+import com.control.irrigation.model.Fazenda;
 import com.control.irrigation.model.Usuario;
 import com.control.irrigation.repository.CulturaFaseRepository;
 import com.control.irrigation.repository.CulturaRepository;
@@ -37,6 +38,14 @@ public class CulturaController {
         return new ResponseEntity<List<Cultura>>(list, HttpStatus.OK);
 
     }
+    @GetMapping("/buscaCulturas/{idFazenda}")
+    @CacheEvict(value = "cacheculturaid", allEntries = true)
+    @CachePut("cacheculturaid")
+    public ResponseEntity<List<Cultura>> obterCulturasPorIdFazenda(@PathVariable(value = "idFazenda") Integer idFazenda){
+        List<Cultura> list = (List<Cultura>) repository.buscaCulturaPorIdFazenda(idFazenda);
+        return new ResponseEntity<List<Cultura>>(list, HttpStatus.OK);
+    }
+
     @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<Cultura> salvar( @RequestBody Cultura cultura ){
 

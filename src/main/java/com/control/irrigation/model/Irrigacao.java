@@ -34,7 +34,7 @@ public class Irrigacao {
     @Column(name = "Pivo")
     private Float pivo;
 
-    @Column(name = "Gotejo", nullable = false)
+    @Column(name = "Gotejo")
     private Float gotejo;
 
     @Column(name = "InicioIrrigacao", nullable = false)

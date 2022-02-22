@@ -1,5 +1,6 @@
 package com.control.irrigation.controller;
 
+import com.control.irrigation.model.Cultura;
 import com.control.irrigation.model.Gotejador;
 import com.control.irrigation.repository.GotejadorRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,14 @@ public class GotejadorController {
         List<Gotejador> list = (List<Gotejador>) repository.findAll();
         return new ResponseEntity<List<Gotejador>>(list, HttpStatus.OK);
 
+    }
+
+    @GetMapping("/buscaGotejadores/{idFazenda}")
+    @CacheEvict(value = "cachegotejadorid", allEntries = true)
+    @CachePut("cachegotejadorid")
+    public ResponseEntity<List<Gotejador>> obterGotejadoresPorIdFazenda(@PathVariable(value = "idFazenda") Integer idFazenda){
+        List<Gotejador> list = (List<Gotejador>) repository.buscaGotejadorPorIdFazenda(idFazenda);
+        return new ResponseEntity<List<Gotejador>>(list, HttpStatus.OK);
     }
 
     @PostMapping

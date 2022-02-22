@@ -42,7 +42,7 @@ public class Parcela {
     private String nomeParcela;
 
     @Column(name = "DataPlantio", nullable = false, updatable = false )
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataPlantio;
 
     @Column(name = "AreaParcela", nullable = false)
