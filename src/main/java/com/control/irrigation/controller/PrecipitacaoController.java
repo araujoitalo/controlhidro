@@ -1,5 +1,6 @@
 package com.control.irrigation.controller;
 
+import com.control.irrigation.model.Irrigacao;
 import com.control.irrigation.model.Precipitacao;
 import com.control.irrigation.repository.PrecipitacaoRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,14 @@ public class PrecipitacaoController{
         List<Precipitacao> list = (List<Precipitacao>) repository.findAll();
         return new ResponseEntity<List<Precipitacao>>(list, HttpStatus.OK);
 
+    }
+    @GetMapping("/buscaPrecipitacoes/{idParcela}")
+    @CacheEvict(value = "cacheprecipitacaoid", allEntries = true)
+    @CachePut("cacheprecipitacaoid")
+    public ResponseEntity<List<Precipitacao>> obterPrecipitacaoPorIdParcela(
+            @PathVariable(value = "idParcela") Integer idParcela){
+        List<Precipitacao> list = (List<Precipitacao>) repository.buscaPrecipitacaoPorIdParcela(idParcela);
+        return new ResponseEntity<List<Precipitacao>>(list, HttpStatus.OK);
     }
 
     @PostMapping

@@ -1,6 +1,7 @@
 package com.control.irrigation.controller;
 
 import com.control.irrigation.model.Clima;
+import com.control.irrigation.model.Fazenda;
 import com.control.irrigation.model.Irrigacao;
 import com.control.irrigation.repository.ClimaRepository;
 import com.control.irrigation.repository.IrrigacaoRepository;
@@ -31,6 +32,15 @@ public class IrrigacaoController  {
         List<Irrigacao> list = (List<Irrigacao>) repository.findAll();
         return new ResponseEntity<List<Irrigacao>>(list, HttpStatus.OK);
 
+    }
+
+    @GetMapping("/buscaIrrigacoes/{idParcela}")
+    @CacheEvict(value = "cacheirrigacaoid", allEntries = true)
+    @CachePut("cacheirrigacaoid")
+    public ResponseEntity<List<Irrigacao>> obterFazendasPorIdParcela(
+            @PathVariable(value = "idParcela") Integer idParcela){
+        List<Irrigacao> list = (List<Irrigacao>) repository.buscaIrrigacaoPorIdParcela(idParcela);
+        return new ResponseEntity<List<Irrigacao>>(list, HttpStatus.OK);
     }
 
     @PostMapping

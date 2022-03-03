@@ -26,7 +26,7 @@ public class Precipitacao {
     private Integer idParcela;
 
     @Column(name = "DataPrecipitacao", nullable = false )
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataPrecipitacao;
 
     @Column(name = "Chuva", nullable = false)

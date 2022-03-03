@@ -2,6 +2,7 @@ package com.control.irrigation.controller;
 
 import com.control.irrigation.model.Cultura;
 import com.control.irrigation.model.Fazenda;
+import com.control.irrigation.model.Gotejador;
 import com.control.irrigation.model.Outorga;
 import com.control.irrigation.repository.FazendaRepository;
 import com.control.irrigation.repository.OutorgaRepository;
@@ -32,6 +33,15 @@ public class OutorgaController {
         List<Outorga> list = (List<Outorga>) repository.findAll();
         return new ResponseEntity<List<Outorga>>(list, HttpStatus.OK);
 
+    }
+
+    @GetMapping("/buscaOutorgas/{idFazenda}")
+    @CacheEvict(value = "cacheoutorgaid", allEntries = true)
+    @CachePut("cacheoutorgaid")
+    public ResponseEntity<List<Outorga>> obterOutorgasPorIdFazenda(
+            @PathVariable(value = "idFazenda") Integer idFazenda){
+        List<Outorga> list = (List<Outorga>) repository.buscaOutorgaPorIdFazenda(idFazenda);
+        return new ResponseEntity<List<Outorga>>(list, HttpStatus.OK);
     }
 
     @PostMapping(value = "/", produces = "application/json")
