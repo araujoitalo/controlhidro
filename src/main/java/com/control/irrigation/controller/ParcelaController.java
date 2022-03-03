@@ -1,6 +1,8 @@
 package com.control.irrigation.controller;
 
 import com.control.irrigation.model.CulturaFase;
+import com.control.irrigation.model.Fazenda;
+import com.control.irrigation.model.Outorga;
 import com.control.irrigation.model.Parcela;
 import com.control.irrigation.repository.CulturaFaseRepository;
 import com.control.irrigation.repository.ParcelaRepository;
@@ -33,11 +35,21 @@ public class ParcelaController {
 
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Parcela salvar(@RequestBody @Valid Parcela parcela){
+    @GetMapping("/buscaParcelas/{idFazenda}")
+    @CacheEvict(value = "cacheparcelaid", allEntries = true)
+    @CachePut("cacheparcelaid")
+    public ResponseEntity<List<Parcela>> obterParcelasPorIdFazenda(
+            @PathVariable(value = "idFazenda") Integer idFazenda){
+        List<Parcela> list = (List<Parcela>) repository.buscaParcelaPorIdFazenda(idFazenda);
+        return new ResponseEntity<List<Parcela>>(list, HttpStatus.OK);
+    }
 
-        return repository.save(parcela);
+    @PostMapping(value = "/", produces = "application/json")
+    public ResponseEntity<Parcela> salvar(@RequestBody Parcela parcela){
+
+        Parcela parcelaSalvo = repository.save(parcela);
+
+        return new ResponseEntity<Parcela>(parcelaSalvo, HttpStatus.OK);
     }
 
     @GetMapping("{id}")
@@ -62,22 +74,13 @@ public class ParcelaController {
 
     }
 
-    @PutMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizar( @PathVariable Integer id,
-                           @RequestBody @Valid Parcela parcelaAtualizado ) {
-        repository
-                .findById(id)
-                .map( parcela -> {
-                    parcela.setNomeParcela((parcelaAtualizado.getNomeParcela()));
+    @PutMapping(value = "/", produces = "application/json")
+    public ResponseEntity<Parcela> alterar(@RequestBody Parcela parcela){
 
+        Parcela parcelaSalvo = repository.save(parcela);
 
-                    return repository.save(parcela);
-                })
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "Parcela não encontrada") );
+        return new ResponseEntity<Parcela>(parcelaSalvo, HttpStatus.OK);
     }
-
 
 }
 

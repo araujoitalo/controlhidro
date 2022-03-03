@@ -50,6 +50,14 @@ public class FazendaController {
         return new ResponseEntity<List<Fazenda>>(list, HttpStatus.OK);
     }
 
+    @GetMapping("/buscaPrimeiraFazenda/{idUsuario}")
+    @CacheEvict(value = "cacheprimeirafazendaid", allEntries = true)
+    @CachePut("cacheprimeirafazendaid")
+    public ResponseEntity<Fazenda> obterPrimeiraFazendasPorIdUsuario(@PathVariable(value = "idUsuario") Integer idUsuario){
+        Fazenda fazenda = (Fazenda) repository.buscaPrimeiraFazendaPorIdUsuario(idUsuario);
+        return new ResponseEntity<Fazenda>(fazenda, HttpStatus.OK);
+    }
+
     @GetMapping("{id}")
     public Fazenda acharPorId(@PathVariable Integer id ){
         return repository

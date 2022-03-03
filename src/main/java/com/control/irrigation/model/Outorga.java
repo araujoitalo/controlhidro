@@ -28,7 +28,7 @@ public class Outorga {
     private String nomeOutorga;
 
     @OneToMany
-    @JoinColumn(name = "idGotejador", foreignKey = @ForeignKey(name = "FK_PARCELA_OUTORGA"))
+    @JoinColumn(name = "idOutorga", foreignKey = @ForeignKey(name = "FK_PARCELA_OUTORGA"))
     private List<Parcela> parcelas;
 
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)

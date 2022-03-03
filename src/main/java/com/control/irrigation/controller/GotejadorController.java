@@ -1,6 +1,7 @@
 package com.control.irrigation.controller;
 
 import com.control.irrigation.model.Cultura;
+import com.control.irrigation.model.Fazenda;
 import com.control.irrigation.model.Gotejador;
 import com.control.irrigation.repository.GotejadorRepository;
 import lombok.RequiredArgsConstructor;
@@ -66,17 +67,12 @@ public class GotejadorController {
 
     }
 
-    @PutMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizar( @PathVariable Integer id,
-                           @RequestBody @Valid Gotejador gotejadorAtualizado ) {
-        repository
-                .findById(id)
-                .map( gotejador -> {
+    @PutMapping(value = "/", produces = "application/json")
+    public ResponseEntity<Gotejador> alterar(@RequestBody Gotejador gotejador ){
 
-                    return repository.save(gotejador);
-                })
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Gotejador não encontrada") );
+        Gotejador gotejadorSalvo = repository.save(gotejador);
+
+        return new ResponseEntity<Gotejador>(gotejadorSalvo, HttpStatus.OK);
     }
 
 
