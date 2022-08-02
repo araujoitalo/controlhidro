@@ -1,10 +1,6 @@
 package com.control.irrigation.controller;
 
-import com.control.irrigation.model.CulturaFase;
-import com.control.irrigation.model.Fazenda;
-import com.control.irrigation.model.Outorga;
 import com.control.irrigation.model.Parcela;
-import com.control.irrigation.repository.CulturaFaseRepository;
 import com.control.irrigation.repository.ParcelaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController

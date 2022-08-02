@@ -78,7 +78,7 @@ public class IrrigacaoController  {
         repository
                 .findById(id)
                 .map( irrigacao -> {
-                    irrigacao.setInicioIrrigacao(irrigacaoAtualizado.getInicioIrrigacao());
+                    irrigacao.setQuantidade(irrigacaoAtualizado.getQuantidade());
                     return repository.save(irrigacao);
                 })
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND,

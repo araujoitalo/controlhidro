@@ -31,31 +31,11 @@ public class Irrigacao {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataIrrigacao;
 
-    @Column(name = "Pivo")
-    private Float pivo;
-
     @Column(name = "Gotejo")
     private Float gotejo;
 
-    @Column(name = "InicioIrrigacao", nullable = false)
-    @JsonFormat(pattern = "HH:mm:ss")
-    private LocalTime inicioIrrigacao;
-
-    @Column(name = "FimIrrigacao")
-    @JsonFormat(pattern = "HH:mm:ss")
-    private LocalTime fimIrrigacao;
-
     @Column(name = "Quantidade", nullable = false)
     private Float quantidade;
-
-    @Column(name = "VolumeConsumido")
-    private Float volumeConsumido;
-
-    @Column(name = "ValorEnergetico")
-    private Float valorEnergetico;
-
-    @Column(name = "KmConsumido")
-    private Float kmConsumido;
 
     @Column(name = "Fertirrigacao")
     private Boolean fertirrigacao;
